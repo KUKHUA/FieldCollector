@@ -1,1 +1,1 @@
-export { default as TextInputHandler } from "./TextInputHandler.js";
+export { default as TextInputHandler } from "/FieldCollector/handlers/TextInputHandler.js";
