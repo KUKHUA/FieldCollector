@@ -1,24 +1,56 @@
-import { HandlerList } from "./HandlerList";
+import HandlerList from "./HandlerList.js";
+import * as handlers from "./handlers/index.js";
 
-export class Collector {
+export default class Collector {
     #handlerList;
-    #htmlElement;
 
-    constructor(htmlElement, handlerList){
-        if(!htmlElement) throw new Error("Invaild htmlElement: not found or null.");
-
-        if(typeof htmlElement === "string")
-            htmlElement = document.getElementById(htmlElement);
-
-        if(handlerList === null)
+    constructor(handlerList){
+        if(handlerList == null)
             handlerList = this.#getDefaultHanderList();
 
         this.#handlerList = handlerList;
-        this.#htmlElement = htmlElement;
     }
 
     #getDefaultHanderList(){
-        defualtList = new HandlerList();
+        const defualtList = new HandlerList();
+        defualtList.addHandler(HTMLInputElement, "input", handlers.TextInputHandler);
 
+        return defualtList;
+    }
+
+    search(htmlElement){
+        if(typeof htmlElement === 'string')
+            htmlElement = document.getElementById(htmlElement);
+
+        let objectResult = {}
+
+        const allElements = htmlElement.querySelectorAll(this.#handlerList.getQuerySelector());
+        console.log(allElements);
+
+        for(const element of allElements){
+            const theHandler = this.#handlerList.findHandlerFor(element);
+            console.log(theHandler);
+            objectResult[element.id] = theHandler.process(element);
+        }
+
+        return objectResult;
+    }
+
+    json(htmlElement){
+        if(typeof htmlElement === 'string')
+            htmlElement = document.getElementById(htmlElement);
+
+        let objectResult = {}
+
+        const allElements = htmlElement.querySelectorAll(this.#handlerList.getQuerySelector());
+        console.log(allElements);
+
+        for(const element of allElements){
+            const theHandler = this.#handlerList.findHandlerFor(element);
+            console.log(theHandler);
+            objectResult[element.id] = theHandler.JSONProcess(element);
+        }
+
+        return objectResult;
     }
 }
