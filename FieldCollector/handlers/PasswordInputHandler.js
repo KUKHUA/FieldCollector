@@ -1,6 +1,6 @@
-export default class TextInputHandler {
+export default class PasswordInputHandler {
     static shouldProcess(htmlElement){
-        return htmlElement.type === "text" || !htmlElement.type;
+        return htmlElement.type === "password";
     }
 
     static process(htmlElement){

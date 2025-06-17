@@ -19,16 +19,12 @@ export default class HandlerList {
         const elementType = htmlElement.constructor;
         const acceptableHandlers = this.#handlerMap.get(elementType);
 
-        for(const handler of acceptableHandlers){
-            if(handler.handler.shouldProcess(htmlElement) == false){
-                const removeIndex = acceptableHandlers.indexOf(handler);
+        if (!acceptableHandlers) return null;
 
-                if (removeIndex !== -1)
-                    acceptableHandlers.splice(removeIndex, 1);
-            }
-        }
+        const vaildHandlers = acceptableHandlers.filter(h => h.handler.shouldProcess(htmlElement));
+        if(vaildHandlers.length === 0) return null;
 
-        return acceptableHandlers[0].handler;
+        return vaildHandlers[0].handler;
         /*
             the array was presorted in `addHandler`, so 
             index 0 will be the handler with the lowest priority number 
@@ -40,6 +36,9 @@ export default class HandlerList {
         if(priority < 0) throw new Error("Invalid priority: it can not be less than zero.");
         if(!tagName) throw new Error("Invaild tagName: cannot be null or undefined.")
         if(!handler) throw new Error("Invaild handler: cannot be null or undefined.");
+        if(typeof handler.shouldProcess !== "function") throw new Error("Invaild handler: shouldProcess should be a function.");
+        if(typeof handler.process !== "function") throw new Error("Invaild handler: process should be a function.");
+        if(typeof handler.JSONProcess !== "function") throw new Error("Invaild handler: JSONProcess should be a function.");
 
         let errMsg = "check if its null or an unknown element";
 
@@ -50,8 +49,6 @@ export default class HandlerList {
 
         if(!this.#isElementType(elementType))
             throw new Error("Invalid elementType: " + errMsg);
-
-        //TODO: check if the handler has all the required funcitons.
 
         if(!this.#handlerMap.has(elementType))
             this.#handlerMap.set(elementType, []);

@@ -13,7 +13,9 @@ export default class Collector {
 
     #getDefaultHanderList(){
         const defualtList = new HandlerList();
+        defualtList.addHandler(HTMLInputElement, "input", handlers.PasswordInputHandler);
         defualtList.addHandler(HTMLInputElement, "input", handlers.TextInputHandler);
+        defualtList.addHandler(HTMLInputElement, "input", handlers.ButtonInputHandler);
 
         return defualtList;
     }
@@ -29,8 +31,12 @@ export default class Collector {
 
         for(const element of allElements){
             const theHandler = this.#handlerList.findHandlerFor(element);
-            console.log(theHandler);
-            objectResult[element.id] = theHandler.process(element);
+
+            if(theHandler) {
+                objectResult[element.id] = theHandler.process(element);
+            } else {
+                objectResult[element.id] = element;
+            }
         }
 
         return objectResult;
@@ -47,7 +53,8 @@ export default class Collector {
 
         for(const element of allElements){
             const theHandler = this.#handlerList.findHandlerFor(element);
-            console.log(theHandler);
+            if(!theHandler) continue;
+
             objectResult[element.id] = theHandler.JSONProcess(element);
         }
 
