@@ -1,14 +1,14 @@
-export default class PasswordInputHandler {
+export default class TextInputHandler {
     static shouldProcess(htmlElement){
-        return htmlElement.type === "password";
+        return htmlElement.type === "text" || htmlElement.type === "password" || !htmlElement.type;
     }
 
     static process(htmlElement){
         return {
-            "get": () => String(htmlElement.value),
-            "set": (string) => htmlElement.value = string,
-            "base64": () => btoa(htmlElement.value),
-            "binary": () => htmlElement.value.split("")
+            "getText": () => String(htmlElement.value),
+            "setText": (string) => htmlElement.value = string,
+            "toBase64": () => btoa(htmlElement.value),
+            "toBinary": () => htmlElement.value.split("")
                 .map(char => char.charCodeAt(0).toString(2).padStart(8, '0'))
                 .join(" "),
             "clear": () => htmlElement.value = "",
@@ -19,16 +19,15 @@ export default class PasswordInputHandler {
             "disable": () => htmlElement.disabled = true,
             "setPlaceHolder": (text) => htmlElement.placeholder = text,
             "getPlaceHolder": () => htmlElement.placeholder,
-            "append": (text) => htmlElement.value += text,
-            "prepend": (text) => htmlElement.value = text + htmlElement.value,
-            "select": () => htmlElement.select(),
-            "string": String(htmlElement.value),
+            "appendText": (text) => htmlElement.value += text,
+            "prependText": (text) => htmlElement.value = text + htmlElement.value,
             "element": htmlElement,
-            
-            "onChange": (callback) => htmlElement.addEventListener("input", (event) => {
-                callback(event.target.value);
+            "onInput": (callback) => htmlElement.addEventListener("input", (event) => {
+                callback(event);
             }),
-            
+            "onChange": (callback) => htmlElement.addEventListener("change", (event) => {
+                callback(event);
+            }),
             "onEnter": (callback) =>  htmlElement.addEventListener("keydown", (event) => {
                 if (event.key === "Enter") callback(event);
             }),

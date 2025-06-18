@@ -10,9 +10,12 @@ export default class ButtonInputHandler {
             "enable": () => htmlElement.disabled = false,
             "focus": () => htmlElement.focus(),
             "blur": () => htmlElement.blur(),
-            "setValue": (val) => htmlElement.value = val,
-            "getValue": () => htmlElement.value,
+            "setText": (val) => htmlElement.value = val,
+            "getText": () => htmlElement.value,
             "element": htmlElement,
+            "onClick": (callback) => htmlElement.addEventListener("click", (event) => {
+                callback(event);
+            }),
         };
     }
 
