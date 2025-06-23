@@ -4,3 +4,8 @@ export { default as CheckBoxHandler } from "/FieldCollector/handlers/input/Check
 export { default as ColorHandler } from "/FieldCollector/handlers/input/ColorHandler.js";
 export { default as DateHandler } from "/FieldCollector/handlers/input/DateHandler.js";
 export { default as DateTimeHandler } from "/FieldCollector/handlers/input/DateTimeHandler.js";
+export {default as FileHandler} from "/FieldCollector/handlers/input/FileHandler.js";
+export {default as NumberHandler} from "/FieldCollector/handlers/input/NumberHandler.js";
+export {default as RadioHandler} from "/FieldCollector/handlers/input/RadioHandler.js";
+export {default as RangeHandler} from "/FieldCollector/handlers/input/RangeHandler.js";
+export {default as TimeHandler} from "/FieldCollector/handlers/input/TimeHandler.js";

@@ -54,7 +54,7 @@ export default class HandlerList {
             this.#handlerMap.set(elementType, []);
 
         const handlerTypeArray = this.#handlerMap.get(elementType);
-        handlerTypeArray.push({handler, priority});
+        handlerTypeArray.push({handler, priority, tagName});
         handlerTypeArray.sort((one, two) => one.priority - two.priority); //sort it in ascending order
 
         this.#handlerMap.set(elementType, handlerTypeArray);

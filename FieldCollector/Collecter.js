@@ -13,12 +13,26 @@ export default class Collector {
 
     #getDefaultHanderList(){
         const defualtList = new HandlerList();
-        defualtList.addHandler(HTMLInputElement, `input[type="text"], input[type="password"], input:not([type])`, inputHandlers.TextHandler);
-        //defualtList.addHandler(HTMLInputElement, "input", inputHandlers.ButtonHandler);
+        defualtList.addHandler(HTMLInputElement, `input[type="text"], input[type="password"], input[type="email"], input[type="hidden"], input[type="tel"]`, inputHandlers.TextHandler);
+
         defualtList.addHandler(HTMLInputElement, `input[type="checkbox"]`, inputHandlers.CheckBoxHandler);
+
         defualtList.addHandler(HTMLInputElement, `input[type="color"]`, inputHandlers.ColorHandler);
+
         defualtList.addHandler(HTMLInputElement, `input[type="date"]`, inputHandlers.DateHandler);
+
         defualtList.addHandler(HTMLInputElement, `input[type="datetime-local"]`, inputHandlers.DateTimeHandler);
+
+        defualtList.addHandler(HTMLInputElement, `input[type="file"]`, inputHandlers.FileHandler);
+        
+        defualtList.addHandler(HTMLInputElement, `input[type="number"]`, inputHandlers.NumberHandler);
+
+        defualtList.addHandler(HTMLInputElement, `input[type="radio"]`, inputHandlers.RadioHandler);
+
+        defualtList.addHandler(HTMLInputElement, `input[type="range"]`, inputHandlers.RangeHandler);
+
+        defualtList.addHandler(HTMLInputElement, `input[type="time"]`, inputHandlers.TimeHandler);
+
 
         return defualtList;
     }
@@ -71,16 +85,22 @@ export default class Collector {
         for(const element of allElements){
             const theHandler = this.#handlerList.findHandlerFor(element);
             if(!theHandler) continue;
+
             const response = theHandler.JSONProcess(element);
+            if(response === undefined || response === null) continue;
+
+            let key = element.id;
+            if(theHandler.customKey) key = theHandler.customKey(element);
+            console.log(key);
         
-            if(objectResult[element.id]){
-                if(!Array.isArray(objectResult[element.id])){
-                    objectResult[element.id] = [objectResult[element.id]];
+            if(objectResult[key]){
+                if(!Array.isArray(objectResult[key])){
+                    objectResult[key] = [objectResult[key]];
                 }
 
-                objectResult[element.id].push(response);
+                objectResult[key].push(response);
             } else {
-                objectResult[element.id] = response;
+                objectResult[key] = response;
             }
         }
 

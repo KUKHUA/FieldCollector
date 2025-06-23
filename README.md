@@ -40,14 +40,20 @@ could result in the following:
 
 ## Default Handlers
 The default Handlers include:
-
- * `input[type="text"]`
- * `input[type="password"]`
- * `input[type="checkbox"]`
- * `input[type="color"]`
- * `input[type="date"]`
- * `input[type="datetime-local"]`
- * `input:not([type])` (treated like a generic text input)
+### Input
+* text
+* password
+* email
+* hidden
+* checkbox
+* color
+* date
+* datetime-local
+* file
+* number
+* radio
+* range
+* time
 
 More handlers are planned and can be added manually.
 
