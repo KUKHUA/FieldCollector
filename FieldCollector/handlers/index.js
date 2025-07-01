@@ -9,3 +9,4 @@ export {default as NumberHandler} from "/FieldCollector/handlers/input/NumberHan
 export {default as RadioHandler} from "/FieldCollector/handlers/input/RadioHandler.js";
 export {default as RangeHandler} from "/FieldCollector/handlers/input/RangeHandler.js";
 export {default as TimeHandler} from "/FieldCollector/handlers/input/TimeHandler.js";
+export {default as SelectHandler} from "/FieldCollector/handlers/select/SelectHandler.js";
