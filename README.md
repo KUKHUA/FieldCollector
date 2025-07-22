@@ -11,8 +11,9 @@ Not all planned handlers are complete, expect changes and bugs.
 For example,
 
 ```javascript
+import Collector from "./dist/bundle.js";
 
-import Collector from "/FieldCollector/Collector.js";
+//import HandlerList from "./dist/bundle.js"
 //const myList = new HandlerList();
 //myList.addHandler(HTMLInputElement, "input", inputHandlers.ButtonHandler);
 //myList.addHandler(HTMLInputElement, `input[type="color"]`, inputHandlers.ColorHandler);

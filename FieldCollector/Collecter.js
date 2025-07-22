@@ -1,6 +1,7 @@
 import HandlerList from "./HandlerList.js";
 import * as handlers from "./handlers/index.js";
 
+export { HandlerList };
 export default class Collector {
     #handlerList;
 
