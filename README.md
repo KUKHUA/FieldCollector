@@ -17,7 +17,7 @@ import Collector from "/FieldCollector/Collector.js";
 //myList.addHandler(HTMLInputElement, "input", inputHandlers.ButtonHandler);
 //myList.addHandler(HTMLInputElement, `input[type="color"]`, inputHandlers.ColorHandler);
 
-//pass myList to collector if you want
+//pass myList to collector if you want to use a cusotmized list
 const collector = new Collector();
 
 const data = collector.json("myForm");
