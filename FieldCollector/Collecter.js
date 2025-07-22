@@ -14,6 +14,7 @@ export default class Collector {
     #getDefaultHanderList(){
         const defualtList = new HandlerList();
         defualtList.addHandler(HTMLInputElement, `input[type="text"], input[type="password"], input[type="email"], input[type="hidden"], input[type="tel"], div`, handlers.TextHandler);
+        // i put div in here so inputs inside divs are serliazed.
 
         defualtList.addHandler(HTMLInputElement, `input[type="checkbox"]`, handlers.CheckBoxHandler);
 

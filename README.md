@@ -1,5 +1,5 @@
 # FieldCollector
-A pluggable JavaScript library for collecting and processing data from form elements on a web page.
+Converts common form elements inside a div all to json.
 
 **This project is a work in progress.**
 Not all planned handlers are complete, expect changes and bugs.
