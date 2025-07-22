@@ -1,5 +1,5 @@
-import HandlerList from "/FieldCollector/HandlerList.js";
-import * as handlers from "/FieldCollector/handlers/index.js";
+import HandlerList from "./HandlerList.js";
+import * as handlers from "./handlers/index.js";
 
 export default class Collector {
     #handlerList;
